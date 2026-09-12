@@ -1,0 +1,34 @@
+:root {
+  --fg: #242424;
+  --muted: #616161;
+  --accent: #185abd;
+  --border: #e0e0e0;
+  --bg-subtle: #f5f5f5;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  color: var(--fg);
+  background: #fff;
+  font: 16px/1.55 "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+}
+.wrap { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; }
+header.site { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+header.site img { width: 40px; height: 40px; }
+header.site h1 { font-size: 26px; margin: 0; }
+nav a { margin-right: 16px; color: var(--accent); text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+nav { margin: 8px 0 32px; font-size: 15px; }
+h2 { font-size: 20px; margin: 32px 0 8px; }
+p.lead { font-size: 18px; color: var(--muted); }
+a { color: var(--accent); }
+code, pre { font: 14px/1.45 Consolas, "Cascadia Mono", Menlo, monospace; }
+code { background: var(--bg-subtle); padding: 1px 5px; border-radius: 4px; }
+pre { background: var(--bg-subtle); padding: 12px 14px; border-radius: 6px; overflow-x: auto; }
+ol li, ul li { margin: 6px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-top: 1px solid var(--border); }
+thead th { border-top: 0; color: var(--muted); }
+.note { border-left: 4px solid var(--accent); background: var(--bg-subtle); padding: 10px 14px; border-radius: 0 6px 6px 0; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }

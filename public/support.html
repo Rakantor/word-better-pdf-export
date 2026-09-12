@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support · Better PDF Export for Word</title>
+<link rel="icon" href="assets/icon-32.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+<header class="site"><img src="assets/icon-80.png" alt="" width="40" height="40"><h1>Better PDF Export for Word</h1></header>
+<nav><a href="index.html">Overview</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/Rakantor/word-better-pdf-export">GitHub</a></nav>
+<h2>Getting help</h2>
+<p>Better PDF Export is open source and maintained on GitHub. Please report problems and ask questions there:</p>
+<p><a href="https://github.com/Rakantor/word-better-pdf-export/issues">github.com/Rakantor/word-better-pdf-export/issues</a></p>
+<p>When reporting a problem with a specific document, include the text from the <strong>Picture details</strong> and <strong>Log</strong> sections of the task pane. They list every picture in the PDF and what happened to it. Attach the document only if you are comfortable sharing it publicly.</p>
+
+<h2>Frequently asked questions</h2>
+
+<h3>A picture was not replaced. Why?</h3>
+<p>The pane tells you the reason for each picture:</p>
+<ul>
+  <li><strong>Skipped – picture effect</strong>: the picture uses recolouring, brightness/contrast, transparency, artistic effects or soft edges. Word bakes these into the exported bitmap, so replacing it would remove the effect.</li>
+  <li><strong>Skipped – already lossless / original bytes</strong>: Word exported this picture without loss; nothing to improve.</li>
+  <li><strong>Left as is – not matched</strong>: no picture in the document looks like this image (for example a linked picture whose file is not embedded, or an image Word generated itself).</li>
+</ul>
+
+<h3>The PDF is much larger than before.</h3>
+<p>That is expected: the original pictures are embedded at full size. A 12 MB photo makes the PDF about 12 MB larger. Downsize pictures in Word beforehand if you need a smaller file.</p>
+
+<h3>Does it work in Word on the web or on iPad?</h3>
+<p>Word on the web cannot pass the exported PDF to add-ins, so the add-in is not available there. Windows and Mac are supported.</p>
+
+<h3>Is my document sent anywhere?</h3>
+<p>No. The export and the picture replacement run entirely inside Word's task pane on your computer. See the <a href="privacy.html">privacy policy</a>.</p>
+<footer>Better PDF Export is an open-source Word add-in. Source code and issue tracker: <a href="https://github.com/Rakantor/word-better-pdf-export">github.com/Rakantor/word-better-pdf-export</a>.</footer>
+</div>
+</body>
+</html>

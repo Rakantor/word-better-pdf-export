@@ -71,6 +71,7 @@ module.exports = async (env, options) => {
         patterns: [
           { from: "assets/*", to: "assets/[name][ext]" },
           { from: "src/taskpane/taskpane.css", to: "taskpane.css" },
+          { from: "**/*", to: "[path][name][ext]", context: "public" },
           {
             from: "manifest*.xml",
             to: "[name][ext]",

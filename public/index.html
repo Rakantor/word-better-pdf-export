@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Better PDF Export for Word</title>
+<link rel="icon" href="assets/icon-32.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+<header class="site"><img src="assets/icon-80.png" alt="" width="40" height="40"><h1>Better PDF Export for Word</h1></header>
+<nav><a href="index.html">Overview</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/Rakantor/word-better-pdf-export">GitHub</a></nav>
+<p class="lead">Export Word documents to PDF without the picture compression Word applies on its own.</p>
+
+<p>Word's built-in PDF export downsamples pictures to roughly 220 ppi and recompresses them as JPEG. Better PDF Export still lets Word produce the PDF (layout, fonts, vector graphics and bookmarks stay exactly as Word makes them), then swaps every compressed picture in the PDF for the untouched original image that is stored inside your document.</p>
+
+<div class="note">Everything happens on your computer, inside Word's task pane. Your document is never uploaded anywhere.</div>
+
+<h2>How to use it</h2>
+<ol>
+  <li>Open the document in Word for Windows or Mac (Microsoft 365).</li>
+  <li>On the <strong>Home</strong> tab, choose <strong>Export PDF</strong> in the <em>Better PDF Export</em> group.</li>
+  <li>Click <strong>Export PDF with original pictures</strong> and choose where to save the file.</li>
+</ol>
+<p>The pane shows, for every picture in the PDF, whether it was replaced, skipped or left as is, and why.</p>
+
+<h2>Install</h2>
+<p>The add-in is being prepared for Microsoft Marketplace. Until it is listed there, it can be installed manually on Windows:</p>
+<ol>
+  <li>Download the manifest: <a href="manifest.xml" download>manifest.xml</a> and save it, for example to <code>C:\Users\&lt;you&gt;\Documents\BetterPdfExport\manifest.xml</code>.</li>
+  <li>Save the following as <code>install.reg</code>, edit the path to match step 1 (backslashes doubled), and double-click it:
+<pre>Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\16.0\Wef\Developer]
+"03305ea7-f246-41ac-8451-c52f63a8f2ff"="C:\\Users\\&lt;you&gt;\\Documents\\BetterPdfExport\\manifest.xml"</pre></li>
+  <li>Restart Word. The <strong>Export PDF</strong> button appears on the Home tab.</li>
+</ol>
+<p>To uninstall, delete that registry value and clear <code>%LOCALAPPDATA%\Microsoft\Office\16.0\Wef\</code>.</p>
+
+<h2>What is and isn't changed</h2>
+<table>
+<thead><tr><th>Content</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Photos and other bitmap pictures</td><td>Replaced with the original file at full resolution (JPEG bytes verbatim, PNG lossless)</td></tr>
+<tr><td>Cropped pictures</td><td>Cropped region taken from the original at full resolution</td></tr>
+<tr><td>Pictures with colour/transparency/artistic effects</td><td>Left as Word exported them (the effect is part of Word's rendering)</td></tr>
+<tr><td>Text, shapes, charts, SVG/EMF graphics</td><td>Untouched: Word already exports these as vectors</td></tr>
+</tbody>
+</table>
+
+<h2>Requirements</h2>
+<p>Word for Windows or Word for Mac with a Microsoft 365 subscription. Word on the web is not supported because it cannot hand the exported PDF to add-ins.</p>
+<footer>Better PDF Export is an open-source Word add-in. Source code and issue tracker: <a href="https://github.com/Rakantor/word-better-pdf-export">github.com/Rakantor/word-better-pdf-export</a>.</footer>
+</div>
+</body>
+</html>
