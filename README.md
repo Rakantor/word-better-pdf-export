@@ -38,10 +38,28 @@ Effects that don't alter the pixels (rotation, borders, shadows, glow, reflectio
 
 ## Requirements
 
-- Word for Windows, Microsoft 365 (the PDF file type of `getFileAsync` is supported on Windows, Mac and iPad, **not** in Word on the web). WebView2-based task pane (any current Microsoft 365 build).
+- Word for Windows or Mac, Microsoft 365 (the PDF file type of `getFileAsync` is supported on Windows, Mac and iPad, **not** in Word on the web).
 - Node.js 20–24 for building/serving the add-in.
 
-## Quick start (everything on Windows)
+## Install (production build from GitHub Pages)
+
+The add-in is deployed to <https://rakantor.github.io/word-better-pdf-export/>. Until it is listed in Microsoft Marketplace, install it by registering the production manifest with Word once. On Windows, from a clone of this repo:
+
+```bash
+npm install
+```
+
+```bash
+npm run build
+```
+
+```bash
+npm run register:prod
+```
+
+Then restart Word; **Export PDF** is on the Home tab. `npm run unregister:prod` removes it again. Without Node, follow the manual registry instructions on the [site](https://rakantor.github.io/word-better-pdf-export/#install).
+
+## Development
 
 ```bash
 npm install
@@ -51,44 +69,28 @@ npm install
 npm start
 ```
 
-`npm start` starts the HTTPS dev server on `https://localhost:3000`, creates and trusts a development certificate, registers the manifest for sideloading and opens `file-sample.docx` in Word. Then: **Home → Better PDF Export → Export PDF**.
+`npm start` (run on Windows or Mac) starts the HTTPS dev server on `https://localhost:3000`, creates and trusts a development certificate, registers `manifest.xml` for sideloading and opens `file-sample.docx` in Word. `npm run stop` unregisters it again.
 
-`npm run stop` unregisters the add-in again.
+Both the dev manifest and the production manifest can be registered at the same time; they have the same ID, so Word shows whichever was registered last.
 
-## Development from WSL with Word on Windows
+### Developing from WSL with Word on Windows
 
-`office-addin-debugging` cannot register the add-in in the Windows registry from inside WSL, so the sideload step is manual, once:
+`office-addin-debugging` cannot write to the Windows registry from inside WSL. Either copy the project to a Windows path and run `npm start` there (simplest), or run `npm run dev-server` in WSL, trust `~/.office-addin-dev-certs/ca.crt` on the Windows side (`certutil -addstore -user Root <path>`), and register the manifest with a `.reg` file:
 
-1. In WSL, start the dev server:
+```text
+Windows Registry Editor Version 5.00
 
-   ```bash
-   npm run dev-server
-   ```
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\16.0\Wef\Developer]
+"03305ea7-f246-41ac-8451-c52f63a8f2ff"="C:\\path\\to\\manifest.xml"
+```
 
-   On first run this generates `~/.office-addin-dev-certs/{ca.crt,localhost.crt,localhost.key}` (no sudo needed). Windows reaches WSL's `localhost:3000` directly.
+The value name is the `<Id>` from `manifest.xml`.
 
-2. Trust the CA on the Windows side (Word's WebView2 must trust the certificate). In an **elevated** PowerShell or cmd on Windows:
+## Deployment
 
-   ```bash
-   certutil -addstore -user Root "\\wsl.localhost\<Distro>\home\<user>\.office-addin-dev-certs\ca.crt"
-   ```
+Every push to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml): typecheck, tests, production build, manifest validation, then deploy `dist/` to GitHub Pages. The production build rewrites every `https://localhost:3000/` in the manifest to `urlProd` from [webpack.config.js](webpack.config.js) and copies the static pages in `public/` (landing page, support, privacy policy, terms of use — the URLs Microsoft Marketplace requires).
 
-   (or double-click `ca.crt` → Install Certificate → Current User → Trusted Root Certification Authorities.)
-
-3. Register the manifest for sideloading. Save the following as `sideload.reg` on Windows, adjust the path (a copy of `manifest.xml` on a local Windows drive is the most reliable), double-click it, then restart Word:
-
-   ```text
-   Windows Registry Editor Version 5.00
-
-   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\16.0\Wef\Developer]
-   "03305ea7-f246-41ac-8451-c52f63a8f2ff"="C:\\Users\\<you>\\word-better-pdf-export\\manifest.xml"
-   ```
-
-   The value name is the `<Id>` from `manifest.xml`. Alternatively use a [shared folder catalog](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins).
-
-4. In Word: **Home → Add-ins → More Add-ins → Developer Add-ins** (or **Shared Folder**) → *Better PDF Export* → Add. The **Export PDF** button appears on the Home tab.
-
-To remove it later, delete the registry value and clear the Office cache (`%LOCALAPPDATA%\Microsoft\Office\16.0\Wef\`).
+One-time repository setup: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 ## Testing the core against a real Word export (no add-in needed)
 
@@ -104,13 +106,14 @@ This writes `word-export.original-images.pdf` next to the input and prints one l
 npx tsx scripts/extract-images.ts "path/to/word-export.pdf" extracted
 ```
 
-## Development
+## Scripts
 
 ```bash
 npm test          # node:test suite (crop, effects, decoy, passthrough, Flate/predictor decoding, form XObjects)
 npm run typecheck
 npm run build     # production bundle in dist/ (replaces https://localhost:3000/ with urlProd from webpack.config.js)
 npm run validate  # office-addin-manifest validate
+npm run fix-pdf -- doc.docx export.pdf   # CLI version of the pipeline, for testing against Word's own export
 ```
 
 `npm run make-test-pdf` writes `file-sample.simulated-word.pdf`, a PDF that imitates Word's export (pictures downsampled to 220 ppi and recompressed, plus a decoy picture with the same aspect ratio) — handy for iterating without Word. `test/browser/run.sh` bundles a harness that runs the same pipeline with the canvas-based codecs in a real Chromium at `http://localhost:8123/test/browser/`.
@@ -128,8 +131,10 @@ src/browser/     Platform impl. using createImageBitmap / OffscreenCanvas / DOMP
 src/node/        Platform impl. using jpeg-js / pngjs / @xmldom/xmldom (tests and CLI)
 src/taskpane/    task pane UI, getFileAsync wrapper, save helpers
 scripts/         fix-pdf (CLI), make-test-pdf, simulate-word-export, extract-images, inspect-pdf
+public/          static site: landing page, support, privacy, terms (deployed next to the add-in)
 test/            node:test suites and the browser harness
 manifest.xml     add-in only (XML) manifest, Word desktop, ribbon button on Home
+.github/         GitHub Pages deployment workflow
 ```
 
 ## Notes and limitations
