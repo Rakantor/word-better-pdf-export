@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Better PDF Export</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="taskpane.css" />
+  </head>
+  <body>
+    <main class="pane">
+      <header>
+        <h1>Better PDF Export</h1>
+        <p class="lead">
+          Exports this document with Word's own PDF converter, then puts the original, uncompressed pictures back
+          into the PDF.
+        </p>
+      </header>
+
+      <section class="actions">
+        <button id="export" class="primary" type="button" disabled>Export PDF with original pictures</button>
+        <button id="download" class="secondary" type="button" hidden>Save PDF…</button>
+        <p id="hint" class="hint"></p>
+      </section>
+
+      <ol id="steps" class="steps" hidden>
+        <li data-step="pdf"><span class="mark"></span><span class="label">Export PDF with Word</span><span class="detail"></span></li>
+        <li data-step="docx"><span class="mark"></span><span class="label">Read original pictures from the document</span><span class="detail"></span></li>
+        <li data-step="replace"><span class="mark"></span><span class="label">Restore pictures in the PDF</span><span class="detail"></span></li>
+        <li data-step="save"><span class="mark"></span><span class="label">Save</span><span class="detail"></span></li>
+      </ol>
+
+      <section id="summary" class="summary" hidden></section>
+
+      <details id="report" class="report" hidden>
+        <summary>Picture details</summary>
+        <table>
+          <thead>
+            <tr><th>Page</th><th>In Word's PDF</th><th>Result</th></tr>
+          </thead>
+          <tbody id="report-rows"></tbody>
+        </table>
+      </details>
+
+      <details id="log-details" class="log" hidden>
+        <summary>Log</summary>
+        <pre id="log"></pre>
+      </details>
+
+      <p id="error" class="error" role="alert" hidden></p>
+    </main>
+  </body>
+</html>
