@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const urlDev = "https://localhost:3000/";
-const urlProd = "https://www.example.com/"; // CHANGE THIS TO YOUR PRODUCTION DEPLOYMENT LOCATION
+const urlProd = "https://rakantor.github.io/word-better-pdf-export/"; // GitHub Pages
 
 /**
  * HTTPS certificates for the dev server.
@@ -30,6 +30,10 @@ async function getHttpsOptions() {
     }
   }
   return { ca: fs.readFileSync(files.ca), cert: fs.readFileSync(files.cert), key: fs.readFileSync(files.key) };
+}
+
+function escapeRegExp(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 module.exports = async (env, options) => {
@@ -70,8 +74,14 @@ module.exports = async (env, options) => {
           {
             from: "manifest*.xml",
             to: "[name][ext]",
+            // In production, point every localhost URL at the deployed site. <AppDomain> carries the
+            // bare origin (no trailing slash), so that is rewritten to the production origin.
             transform(content) {
-              return dev ? content : content.toString().replace(new RegExp(urlDev, "g"), urlProd);
+              if (dev) return content;
+              return content
+                .toString()
+                .replace(new RegExp(escapeRegExp(urlDev), "g"), urlProd)
+                .replace(new RegExp(escapeRegExp(urlDev.replace(/\/$/, "")), "g"), new URL(urlProd).origin);
             },
           },
         ],
