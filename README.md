@@ -57,7 +57,9 @@ npm run build
 npm run register:prod
 ```
 
-Then restart Word; **Export PDF** is on the Home tab. `npm run unregister:prod` removes it again. Without Node, follow the manual registry instructions on the [site](https://rakantor.github.io/word-better-pdf-export/#install).
+This copies the built manifest to a stable per-user location (`%LOCALAPPDATA%\BetterPdfExport\manifest.xml` on Windows) and registers that copy with Word, so the project folder can be deleted afterwards. Restart Word; **Export PDF** is on the Home tab. `npm run unregister:prod` removes it again. Without Node, follow the manual registry instructions on the [site](https://rakantor.github.io/word-better-pdf-export/#install).
+
+Word re-reads registered manifests at every start. If the button ever disappears, check that the registered path still exists: `reg query HKCU\SOFTWARE\Microsoft\Office\16.0\Wef\Developer`.
 
 ## Development
 
@@ -130,7 +132,7 @@ src/core/        environment-agnostic pipeline
 src/browser/     Platform impl. using createImageBitmap / OffscreenCanvas / DOMParser (the add-in)
 src/node/        Platform impl. using jpeg-js / pngjs / @xmldom/xmldom (tests and CLI)
 src/taskpane/    task pane UI, getFileAsync wrapper, save helpers
-scripts/         fix-pdf (CLI), make-test-pdf, simulate-word-export, extract-images, inspect-pdf
+scripts/         fix-pdf (CLI), register-prod, make-test-pdf, simulate-word-export, extract-images, inspect-pdf
 public/          static site: landing page, support, privacy, terms (deployed next to the add-in)
 test/            node:test suites and the browser harness
 manifest.xml     add-in only (XML) manifest, Word desktop, ribbon button on Home
