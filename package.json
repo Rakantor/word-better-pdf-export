@@ -10,7 +10,7 @@
     "dev_server_port": 3000
   },
   "engines": {
-    "node": ">=20 <25"
+    "node": "^22.15.0 || ^24.0.0 || ^26.0.0"
   },
   "scripts": {
     "build": "webpack --mode production",
@@ -31,24 +31,24 @@
     "pdf-lib": "^1.17.1"
   },
   "devDependencies": {
-    "@types/node": "^20.11.25",
-    "@types/office-js": "^1.0.377",
+    "@types/node": "^26.6.2",
+    "@types/office-js": "^1.0.609",
     "@types/pngjs": "^6.0.5",
     "@xmldom/xmldom": "^0.9.12",
-    "copy-webpack-plugin": "^12.0.2",
-    "html-webpack-plugin": "^5.6.0",
+    "copy-webpack-plugin": "^14.0.0",
+    "html-webpack-plugin": "^5.6.8",
     "jpeg-js": "^0.4.4",
-    "office-addin-debugging": "^6.1.2",
-    "office-addin-dev-certs": "^2.0.10",
-    "office-addin-manifest": "^2.1.6",
+    "office-addin-debugging": "^7.0.0",
+    "office-addin-dev-certs": "^3.0.0",
+    "office-addin-dev-settings": "^4.0.0",
+    "office-addin-manifest": "^3.0.0",
     "pngjs": "^7.0.0",
-    "ts-loader": "^9.5.1",
-    "tsx": "^4.19.0",
-    "typescript": "^5.4.2",
-    "webpack": "^5.90.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.0",
-    "office-addin-dev-settings": "^3.1.2"
+    "ts-loader": "^9.6.2",
+    "tsx": "^4.23.13",
+    "typescript": "^6.0.3",
+    "webpack": "^5.111.1",
+    "webpack-cli": "^7.2.3",
+    "webpack-dev-server": "^6.0.0"
   },
   "homepage": "https://rakantor.github.io/word-better-pdf-export/",
   "repository": {
@@ -57,5 +57,9 @@
   },
   "bugs": {
     "url": "https://github.com/Rakantor/word-better-pdf-export/issues"
+  },
+  "overrides": {
+    "adm-zip": "^0.6.1",
+    "qs": "^6.16.0"
   }
 }
