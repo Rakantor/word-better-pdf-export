@@ -13,7 +13,7 @@
 <nav><a href="index.html">Overview</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/Rakantor/word-better-pdf-export">GitHub</a></nav>
 <p class="lead">Export Word documents to PDF without the picture compression Word applies on its own.</p>
 
-<p>Word's built-in PDF export downsamples pictures to roughly 220 ppi and recompresses them as JPEG. Better PDF Export still lets Word produce the PDF (layout, fonts, vector graphics and bookmarks stay exactly as Word makes them), then swaps every compressed picture in the PDF for the untouched original image that is stored inside your document.</p>
+<p>Word's built-in PDF export can downsample and recompress pictures. Better PDF Export still lets Word produce the PDF (using Word’s layout and drawing instructions), then restores matching pictures from the image files stored inside your document.</p>
 
 <div class="note">Everything happens on your computer, inside Word's task pane. Your document is never uploaded anywhere.</div>
 
@@ -25,7 +25,7 @@
 </ol>
 <p>The pane shows, for every picture in the PDF, whether it was replaced, skipped or left as is, and why.</p>
 
-<h2>Install</h2>
+<h2 id="install">Install</h2>
 <p>The add-in is being prepared for Microsoft Marketplace. Until it is listed there, it can be installed manually on Windows:</p>
 <ol>
   <li>Download the manifest: <a href="manifest.xml" download>manifest.xml</a> and save it, for example to <code>C:\Users\&lt;you&gt;\Documents\BetterPdfExport\manifest.xml</code>.</li>
@@ -36,16 +36,18 @@
 "03305ea7-f246-41ac-8451-c52f63a8f2ff"="C:\\Users\\&lt;you&gt;\\Documents\\BetterPdfExport\\manifest.xml"</pre></li>
   <li>Restart Word. The <strong>Export PDF</strong> button appears on the Home tab.</li>
 </ol>
-<p>To uninstall, delete that registry value and clear <code>%LOCALAPPDATA%\Microsoft\Office\16.0\Wef\</code>.</p>
+<p>To uninstall, delete only the registry value <code>03305ea7-f246-41ac-8451-c52f63a8f2ff</code> from the key above, restart Word, and remove your downloaded manifest.</p>
+
+<p>On Mac, download the same manifest and follow <a href="https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-an-office-add-in-on-mac">Microsoft’s sideloading instructions for Word</a>.</p>
 
 <h2>What is and isn't changed</h2>
 <table>
 <thead><tr><th>Content</th><th>Result</th></tr></thead>
 <tbody>
-<tr><td>Photos and other bitmap pictures</td><td>Replaced with the original file at full resolution (JPEG bytes verbatim, PNG lossless)</td></tr>
+<tr><td>Photos and other bitmap pictures</td><td>Matching pictures restored at their stored resolution (uncropped JPEG bytes verbatim, PNG lossless)</td></tr>
 <tr><td>Cropped pictures</td><td>Cropped region taken from the original at full resolution</td></tr>
 <tr><td>Pictures with colour/transparency/artistic effects</td><td>Left as Word exported them (the effect is part of Word's rendering)</td></tr>
-<tr><td>Text, shapes, charts, SVG/EMF graphics</td><td>Untouched: Word already exports these as vectors</td></tr>
+<tr><td>Text, shapes, charts, SVG/EMF graphics</td><td>Word’s drawing instructions retained</td></tr>
 </tbody>
 </table>
 

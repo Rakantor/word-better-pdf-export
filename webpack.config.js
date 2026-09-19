@@ -12,7 +12,7 @@ const urlProd = "https://rakantor.github.io/word-better-pdf-export/"; // GitHub 
  * HTTPS certificates for the dev server.
  *  - Windows/macOS: office-addin-dev-certs generates them and trusts the CA in the OS store (what Word needs).
  *  - Linux/WSL: only generate. Word runs on the Windows side, so trust ~/.office-addin-dev-certs/ca.crt there
- *    (see README) instead of prompting for sudo to install it into the Linux store.
+ *    (see CONTRIBUTING.md) instead of prompting for sudo to install it into the Linux store.
  */
 async function getHttpsOptions() {
   const dir = path.join(os.homedir(), ".office-addin-dev-certs");
