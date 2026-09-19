@@ -5,3 +5,12 @@ dist/
 !assets/*.png
 test/browser/harness.js
 .playwright-mcp/
+
+# Local settings, credentials, and OS files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+npm-debug.log*
