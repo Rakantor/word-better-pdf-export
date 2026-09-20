@@ -20,7 +20,7 @@
 <h2>How to use it</h2>
 <ol>
   <li>Open the document in Word for Windows or Mac (Microsoft 365).</li>
-  <li>On the <strong>Home</strong> tab, choose <strong>Export PDF</strong> in the <em>Better PDF Export</em> group.</li>
+  <li>On the <strong>Home</strong> tab, choose <strong>Export PDF</strong> in the <em>Better PDF Export</em> group. If the button is missing, choose <strong>Add-ins</strong> → <strong>Developer Add-ins</strong> → <strong>Better PDF Export</strong> first (see <a href="#install">Install</a>).</li>
   <li>Click <strong>Export PDF with original pictures</strong> and choose where to save the file.</li>
 </ol>
 <p>The pane shows, for every picture in the PDF, whether it was replaced, skipped or left as is, and why.</p>
@@ -34,11 +34,12 @@
 
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\16.0\Wef\Developer]
 "03305ea7-f246-41ac-8451-c52f63a8f2ff"="C:\\Users\\&lt;you&gt;\\Documents\\BetterPdfExport\\manifest.xml"</pre></li>
-  <li>Restart Word. The <strong>Export PDF</strong> button appears on the Home tab.</li>
+  <li>Restart Word, then choose <strong>Home</strong> → <strong>Add-ins</strong> → <strong>Developer Add-ins</strong> → <strong>Better PDF Export</strong>. The <strong>Export PDF</strong> button appears in the <em>Better PDF Export</em> group on the Home tab.</li>
 </ol>
+<p>Word does not load sideloaded add-ins on its own, so repeat step 3 after each start of Word. This step goes away once the add-in is available from Microsoft Marketplace.</p>
 <p>To uninstall, delete only the registry value <code>03305ea7-f246-41ac-8451-c52f63a8f2ff</code> from the key above, restart Word, and remove your downloaded manifest.</p>
 
-<p>On Mac, download the same manifest and follow <a href="https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-an-office-add-in-on-mac">Microsoft’s sideloading instructions for Word</a>.</p>
+<p>On Mac, download the same manifest and follow <a href="https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-an-office-add-in-on-mac">Microsoft’s sideloading instructions for Word</a>. The add-in is then opened the same way, from <strong>Home</strong> → <strong>Add-ins</strong>.</p>
 
 <h2>What is and isn't changed</h2>
 <table>

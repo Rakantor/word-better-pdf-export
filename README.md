@@ -10,6 +10,8 @@ Document processing runs locally inside Word’s task pane. The add-in does not 
 
 You need **Microsoft 365 Word for Windows or Mac** and permission to sideload Office add-ins. Word on the web is not supported. The current installation flow targets desktop Word, not iPad.
 
+Until the add-in is listed in Microsoft Marketplace, every installation below is a *sideload*, and Word does not load sideloaded add-ins on its own. After each start of Word, open **Home → Add-ins → Developer Add-ins** and choose **Better PDF Export**. The **Export PDF** button then appears in the *Better PDF Export* group on the Home tab for the rest of that Word session.
+
 ### Windows
 
 Follow the [installation instructions](https://rakantor.github.io/word-better-pdf-export/#install) to download and register the manifest. You do not need Node.js or a copy of this repository.
@@ -30,12 +32,12 @@ npm run build
 npm run register:prod
 ```
 
-Restart Word. This registers the hosted add-in using a manifest copied to a stable per-user location (`%LOCALAPPDATA%\BetterPdfExport\manifest.xml` on Windows), so the checkout can be moved or deleted afterwards. Run `npm run unregister:prod` from a checkout with dependencies installed to remove it.
+Restart Word and open the add-in from **Developer Add-ins** as described above. This registers the hosted add-in using a manifest copied to a stable per-user location (`%LOCALAPPDATA%\BetterPdfExport\manifest.xml` on Windows), so the checkout can be moved or deleted afterwards. Run `npm run unregister:prod` from a checkout with dependencies installed to remove it.
 
 ## Export a PDF
 
 1. Open your document in Word.
-2. On the **Home** tab, choose **Export PDF** in the **Better PDF Export** group.
+2. On the **Home** tab, choose **Export PDF** in the **Better PDF Export** group. If the button is missing, choose **Add-ins → Developer Add-ins → Better PDF Export** first (see [Install](#install)).
 3. Click **Export PDF with original pictures**.
 4. Choose a save location when prompted, or save the download offered when export finishes.
 

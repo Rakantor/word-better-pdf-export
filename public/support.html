@@ -29,6 +29,9 @@
 <h3>The PDF is much larger than before.</h3>
 <p>That is expected: the original pictures are embedded at full size. A 12 MB photo makes the PDF about 12 MB larger. Downsize pictures in Word beforehand if you need a smaller file.</p>
 
+<h3>The Export PDF button is not on the ribbon.</h3>
+<p>Until the add-in is listed in Microsoft Marketplace it is installed as a sideloaded (developer) add-in, and Word does not load those on its own. After each start of Word, choose <strong>Home</strong> → <strong>Add-ins</strong> → <strong>Developer Add-ins</strong> → <strong>Better PDF Export</strong>; the button then appears in the <em>Better PDF Export</em> group on the Home tab for the rest of that session. If <em>Developer Add-ins</em> does not list it, check that the registered manifest still exists at the path you used during <a href="index.html#install">installation</a>.</p>
+
 <h3>Does it work in Word on the web or on iPad?</h3>
 <p>Word on the web cannot pass the exported PDF to add-ins, so the add-in is not available there. The current installation flow targets Windows and Mac; iPad is not supported by this project.</p>
 
