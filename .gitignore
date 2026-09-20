@@ -3,6 +3,7 @@ dist/
 *.pdf
 *.png
 !assets/*.png
+!docs/screenshots/*.png
 test/browser/harness.js
 .playwright-mcp/
 

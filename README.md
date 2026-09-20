@@ -6,6 +6,10 @@ Word can downsample or recompress pictures during PDF export. Better PDF Export 
 
 Document processing runs locally inside Word’s task pane. The add-in does not upload your documents or pictures. Its program files load from GitHub Pages and Microsoft’s Office CDN; see the [privacy policy](https://rakantor.github.io/word-better-pdf-export/privacy.html).
 
+![Word with the Better PDF Export task pane after an export: all four steps completed, “1 picture restored to original quality”, and a per-picture report](docs/screenshots/export-finished.png)
+
+![Side-by-side zoom of one picture: the soft 1338×892 JPEG from Word’s PDF export next to the crisp 2800×1867 original restored by the add-in](docs/screenshots/before-after-zoom.png)
+
 ## Install
 
 You need **Microsoft 365 Word for Windows or Mac** and permission to sideload Office add-ins. Word on the web is not supported. The current installation flow targets desktop Word, not iPad.
