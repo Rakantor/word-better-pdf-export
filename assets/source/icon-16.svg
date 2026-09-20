@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <!-- 16 px variant, pixel-aligned: page, fold, picture block, red PDF bar overlapping the page's lower-left corner -->
+  <path d="M3.5 1.5h7l3 3v10h-10z" fill="#dbe8fb" stroke="#185abd" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M10.5 1.5v3h3" fill="#b9d2f5" stroke="#185abd" stroke-width="1" stroke-linejoin="round"/>
+  <rect x="5" y="5" width="7" height="5" fill="#5aaaf0"/>
+  <polygon points="5,10 7.5,7 9.5,9 10.5,8 12,10" fill="#2a9d4a"/>
+  <rect x="1" y="10.5" width="10" height="5" rx="1" fill="#d93025"/>
+</svg>
