@@ -44,7 +44,7 @@
     "office-addin-manifest": "^3.0.0",
     "pngjs": "^7.0.0",
     "ts-loader": "^9.6.2",
-    "tsx": "^4.23.13",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "webpack": "^5.111.1",
     "webpack-cli": "^7.2.3",
