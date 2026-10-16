@@ -37,7 +37,7 @@ jobs:
         if: matrix.node == 26
       - run: npx --no-install office-addin-manifest validate dist/manifest.xml
         if: matrix.node == 26
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: matrix.node == 26 && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
           path: dist
